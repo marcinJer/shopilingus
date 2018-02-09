@@ -1,66 +1,38 @@
+package shopilingus;
+
 public class Product {
 
+    private static int nextId = 0;
+
+    public int id;
     private double price;
-    private String type;
+    public String type;
     private String name;
     private String size;
     private double weight;
     private double tax;
 
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
+    public Product(String name, double price, String type, String size, double weight, double tax) {
+        this.id = Product.nextId++;
         this.name = name;
-    }
-
-    public String getSize() {
-        return size;
-    }
-
-    public void setSize(String size) {
-        this.size = size;
-    }
-
-    public double getWeight() {
-        return weight;
-    }
-
-    public void setWeight(double weight) {
-        this.weight = weight;
-    }
-
-    public double getTax() {
-        return tax;
-    }
-
-    public void setTax(double tax) {
-        this.tax = tax;
-    }
-
-    public Product(double price, String type, String name, String size, double weight, double tax) {
         this.price = price;
         this.type = type;
-        this.name = name;
         this.size = size;
         this.weight = weight;
         this.tax = tax;
+    }
+
+    public Product(String name, double price, String type) {
+        this(name, price, type, null, 0.0, 0.0);
+    }
+
+    public double getNettoPrice() {
+        // TODO
+        return 0.0;
+    }
+
+    public double getBruttoPrice() {
+        // TODO
+        return 0.0;
     }
 }

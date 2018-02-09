@@ -1,37 +1,19 @@
+package shopilingus;
+
 public class Service {
 
+    private static int nextId = 0;
+
+    public int id;
     private String name;
     private double price;
     private int durationInMinutes;
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
+    public Service(int id, String name, double price, int durationInMinutes) {
+        this.id = id;
         this.name = name;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
         this.price = price;
-    }
-
-    public int getDurationInMinutes() {
-        return durationInMinutes;
-    }
-
-    public void setDurationInMinutes(int durationInMinutes) {
         this.durationInMinutes = durationInMinutes;
     }
-
-    public Service(String name, double price, int duration) {
-        this.name = name;
-        this.price = price;
-        this.durationInMinutes = duration;
-    }
-
 }
