@@ -87,6 +87,10 @@ public class Shop {
         employees.add(employee);
     }
 
+    public int getNumberOfEmployees() {
+        return this.employees.size();
+    }
+    
     public void fire(Employee employee) {
         employees.remove(employee);
     }
@@ -115,7 +119,6 @@ public class Shop {
 
     public Product getProduct(int productId) {
         ProductDetails productDetails = findProductDetailsById(productId);
-
         if (productDetails != null) {
             return productDetails.product;
         }
@@ -126,7 +129,7 @@ public class Shop {
         ProductDetails productToRemove = findProductDetailsById(productId);
 
         if (productToRemove != null) {
-            products.remove(productToRemove);
+            products.remove(getProduct(productId));
         }
     }
 
@@ -137,9 +140,42 @@ public class Shop {
         addProduct(modifiedProduct, productDetails.quantity);
     }
 
-//    public void addService(Service service){
-//        this.services.add(service);
-//    }
+    private Service findServiceById(int serviceId){
+        for(Service service : services){
+            if(service.id == serviceId){
+                return  service;
+            }
+        }
+        return null;
+    }
+
+    public void addService(Service service){
+        this.services.add(service);
+    }
+
+    public Service getService(int serviceId){
+        Service service = findServiceById(serviceId);
+        if(service != null){
+            return service;
+        }
+        return null;
+    }
+
+    public void deleteService(int serviceId){
+        Service serviceToRemove = findServiceById(serviceId);
+
+        if(serviceToRemove != null){
+            services.remove(getService(serviceId));
+        }
+    }
+
+    public void updateService(int serviceId, Service modifiedService){
+        Service service = findServiceById(serviceId);
+        deleteService(serviceId);
+        modifiedService.id = serviceId;
+        addService(modifiedService);
+    }
+
 
 }
 
