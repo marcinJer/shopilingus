@@ -11,7 +11,7 @@ public class Service {
 
 
     public Service(int id, String name, double price, int durationInMinutes) {
-        this.id = id;
+        this.id = Service.nextId++;
         this.name = name;
         this.price = price;
         this.durationInMinutes = durationInMinutes;

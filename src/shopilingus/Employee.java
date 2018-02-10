@@ -14,6 +14,9 @@ public class Employee {
         this.skills = skills;
         this.isAvailable = isAvailable;
     }
+    public Employee(String name) {
+        this(name, new String[0], true);
+    }
 
     public static int getNextId() {
         return nextId;
@@ -57,9 +60,7 @@ public class Employee {
 
 
 
-    public Employee(String name) {
-        this(name, new String[0], true);
-    }
+
 
 
 }

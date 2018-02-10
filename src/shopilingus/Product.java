@@ -12,6 +12,8 @@ public class Product {
     private double weight;
     private double tax;
 
+
+
     public Product(String name, double price, String type, String size, double weight, double tax) {
         this.id = Product.nextId++;
         this.name = name;
@@ -21,6 +23,7 @@ public class Product {
         this.weight = weight;
         this.tax = tax;
     }
+
 
     public Product(String name, double price, String type) {
         this(name, price, type, null, 0.0, 0.0);

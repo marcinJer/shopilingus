@@ -1,8 +1,9 @@
 package shopilingus;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 public class ShoppingCenter {
 
@@ -17,7 +18,7 @@ public class ShoppingCenter {
         this.id = ShoppingCenter.nextId++;
         this.name = name;
         this.address = address;
-        this.shops = shops;
+        this.shops = new LinkedList<Shop>();
     }
 
     public static int getNextId() {
@@ -60,8 +61,6 @@ public class ShoppingCenter {
         this.shops = shops;
     }
 
-
-
     public void addShop(Shop shop) {
 
         this.shops.add(shop);
@@ -70,13 +69,13 @@ public class ShoppingCenter {
 
     public void deleteShop(int shopId) {
 
-        for (Shop shop : shops) {
-            if (shop.getId() == shopId) {
-                shops.remove(shop);
-            } else {
-                System.out.println("Nie ma takiego sklepu!");
-            }
-        }
+//        for (Shop shop : shops) {
+//            if (shop.getId() == shopId) {
+//                shops.remove(shop);
+//            }
+//        }
+
+        this.shops.remove(getShop(shopId));
 
     }
 
@@ -107,7 +106,7 @@ public class ShoppingCenter {
                 result.add(shop);
             }
         }
-        return null;
+        return result;
 
 //    return shops.stream()
 //            .filter(shop -> shop.name.equals(name))
@@ -128,47 +127,38 @@ public class ShoppingCenter {
         }
     }
 
-    public List<Product> getAllProducts(){
+    public List<Product> getAllProducts() {
         List<Product> result = new LinkedList<>();
-        for(Shop shop : this.shops){
-            for(ProductDetails productDetails : shop.getProducts()){
+        for (Shop shop : this.shops) {
+            for (ProductDetails productDetails : shop.getProducts()) {
                 result.add(productDetails.product);
             }
         }
-        return null;
+        return result;
     }
 
-    public List<Service> getAllServices(){
+    public List<Service> getAllServices() {
         List<Service> result = new LinkedList<>();
-        for(Shop shop : this.shops){
+        for (Shop shop : this.shops) {
             result.addAll(shop.services);
         }
         return result;
     }
 
-    public List<String> getAllShopTypes(){
-        List<String> result = new LinkedList<>();
-        for(Shop shop : this.shops){
+    public Set<String> getAllShopTypes() {
+        Set<String> result = new HashSet<>();
+        for (Shop shop : this.shops) {
             result.addAll(shop.getTypes());
         }
 
         return result;
     }
 
-    public List<String> getAllProductTypes(){
-        List<String> result = new LinkedList<>();
-        for(Product product : getAllProducts()){
+    public Set<String> getAllProductTypes() {
+        Set<String> result = new HashSet<>();
+        for (Product product : getAllProducts()) {
             result.add(product.type);
         }
         return result;
-}
-
-
-
-
-
-
-
-
-
+    }
 }

@@ -26,14 +26,6 @@ public class Shop {
         this.employees = new LinkedList<Employee>();
     }
 
-    public static int getNextId() {
-        return nextId;
-    }
-
-    public static void setNextId(int nextId) {
-        Shop.nextId = nextId;
-    }
-
     public int getId() {
         return id;
     }
@@ -99,7 +91,7 @@ public class Shop {
         employees.remove(employee);
     }
 
-    public ProductDetails findProductById(int productId) {
+    private ProductDetails findProductDetailsById(int productId) {
 
         for (ProductDetails productDetails : products) {
             if (productDetails.product.id == productId) {
@@ -111,29 +103,45 @@ public class Shop {
 
     public void addProduct(Product product, double quantity) {
 
-        ProductDetails existingProduct = findProductById(product.id);
+        ProductDetails existingProduct = findProductDetailsById(product.id);
 
-        if(existingProduct != null){
+        if (existingProduct != null) {
             existingProduct.quantity += quantity;
-        }else{
+        } else {
             products.add(new ProductDetails(product, quantity));
         }
 
     }
 
-    public Product getProduct(int productId){
-        for(ProductDetails productDetails : products){
-            if(productDetails.product.id == productId){
-                return productDetails.product;
-            }
+    public Product getProduct(int productId) {
+        ProductDetails productDetails = findProductDetailsById(productId);
+
+        if (productDetails != null) {
+            return productDetails.product;
         }
         return null;
     }
 
-    public void deleteProduct(int productId){
+    public void deleteProduct(int productId) {
+        ProductDetails productToRemove = findProductDetailsById(productId);
 
+        if (productToRemove != null) {
+            products.remove(productToRemove);
         }
     }
+
+    public void updateProduct(int productId, Product modifiedProduct){
+        ProductDetails productDetails = findProductDetailsById(productId);
+        deleteProduct(productId);
+        modifiedProduct.id = productId;
+        addProduct(modifiedProduct, productDetails.quantity);
+    }
+
+//    public void addService(Service service){
+//        this.services.add(service);
+//    }
+
+}
 
 
 
