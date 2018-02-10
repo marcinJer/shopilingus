@@ -90,7 +90,7 @@ public class Shop {
     public int getNumberOfEmployees() {
         return this.employees.size();
     }
-    
+
     public void fire(Employee employee) {
         employees.remove(employee);
     }
@@ -133,13 +133,15 @@ public class Shop {
         }
     }
 
-    public void updateProduct(int productId, Product modifiedProduct){
+    public void updateProduct(int productId, Product modifiedProduct) {
         ProductDetails productDetails = findProductDetailsById(productId);
-        deleteProduct(productId);
-        modifiedProduct.id = productId;
-        addProduct(modifiedProduct, productDetails.quantity);
+        if (productDetails != null) {
+            deleteProduct(productId);
+            modifiedProduct.id = productId;
+            addProduct(modifiedProduct, productDetails.quantity);
+        }
+        return;
     }
-
     private Service findServiceById(int serviceId){
         for(Service service : services){
             if(service.id == serviceId){

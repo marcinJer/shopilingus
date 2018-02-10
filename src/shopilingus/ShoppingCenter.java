@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ShoppingCenter {
 
@@ -69,12 +70,6 @@ public class ShoppingCenter {
 
     public void deleteShop(int shopId) {
 
-//        for (Shop shop : shops) {
-//            if (shop.getId() == shopId) {
-//                shops.remove(shop);
-//            }
-//        }
-
         this.shops.remove(getShop(shopId));
 
     }
@@ -108,10 +103,6 @@ public class ShoppingCenter {
         }
         return result;
 
-//    return shops.stream()
-//            .filter(shop -> shop.name.equals(name))
-//            .collect(Collectors.toList());
-//
     }
 
     private Shop findShopById(int id) {
@@ -155,10 +146,15 @@ public class ShoppingCenter {
     }
 
     public Set<String> getAllProductTypes() {
-        Set<String> result = new HashSet<>();
-        for (Product product : getAllProducts()) {
-            result.add(product.type);
-        }
-        return result;
+//        Set<String> result = new HashSet<>();
+//        for (Product product : getAllProducts()) {
+//            result.add(product.type);
+//        }
+//        return result;
+
+    return getAllProducts().stream()
+            .map(product -> product.type)
+            .collect(Collectors.toSet());
+
     }
 }
